@@ -1,0 +1,53 @@
+.nav, .nav-dark {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+
+.nav li {
+	/*background-image:url(../images/btn-bg.png);*/
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 150px; 
+	height: 25px; 
+	display: inline;
+	float: left;
+	padding-top: 5px;
+	margin-right: 5px;
+	text-align: center;
+}
+
+.nav-dark li {
+	background-image:url(../images/btn-bg-dark.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	width: 100px; 
+	height: 25px; 
+	display: inline;
+	float: left;
+	padding-top: 5px;
+	text-align: center;
+}
+
+body {
+	background-repeat:repeat;
+	background-image:url(../images/log.jpg);
+	color:#FFFFFF;
+	font-family:arial ;
+	font-weight: bold;
+	
+}
+
+html {
+	position: relative;
+	height: auto;
+}
+
+#content-container {
+	margin: 10px 100px; 
+	padding: 0 0px;
+	position:inherit;
+	height:inherit;
+}

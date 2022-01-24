@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Police Report Record System</title>
+
+        <link rel="stylesheet" type="text/css" href="style/jquery.datetimepicker.css" />
+    </head>
+    <body style="margin: 0px; font-family: Arial;">
+        <!-- HEAD -->
+        <div style="height:50px; background-color:#dae1e9">
+            <div style="margin: 0 10% 0 10%; background-color: bisque; height: 100%;">
+                <div style="float:left; margin: 11px 0 0 0; width: 100%;">
+                    <div style="float: left; margin: 4px 0 0 10px;">
+                        <b>Police Report Record System</b>
+                    </div>
+                    <div style="float: left; margin: 0 0 0 10px;">
+                        <input type="text" style="width: 315px;" id="txt-search-field" />
+                        <input type="button" value="filter" id="btn-filter" />
+                        <input type="button" value="search" />
+                    </div>
+                    <div style="float: right; margin: 0 10px 0 0;">
+                        <input type="button" value="login" id="btn-login" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- HEAD -->
+
+        <!-- BODY -->
+        <div style="margin: 0 10% 0 10%; min-height: 100px; padding: 20px 10px 0 10px">
+            <!-- CONTROLS -->
+            <div style="height: 30px; border-bottom: solid #dae1e9 1px; margin-bottom: 10px;">
+                <div style="float: left;">
+                    search result 999
+                </div>
+                <div style="float: right;">
+                    1 2 3 4 5 6 7 8 9
+                </div>
+            </div>
+            <!-- CONTROLS -->
+
+            <!-- RESULT -->
+            <div style="float : left;">
+                <div style="float : left; border-bottom: solid #dae1e9 1px; padding-bottom: 10px; cursor: pointer;">
+                    <div style="float : left; min-width: 80%;">Event Number : 1</div>
+                    <div style="float : left; min-width: 20%;">01/01/2015 4:30 PM</div>
+
+                    <div style="float : left; min-width: 80%; margin: 5px 0 0 0;">Apprehending Officer : Juan Dela Cruz</div>
+                
+                    <div style="float : left; min-width: 50%; margin: 5px 0 0 0;">Complainant Name : Frederick C Molina Jr.</div>
+                    <div style="float : left; min-width: 50%; margin: 5px 0 0 0;">Accused Name : Ivan Balio</div>
+
+                    <div style="float : left; min-width: 50%; margin: 5px 0 0 0;">Subject/Incident : Robery/Tieft</div>
+                    <div style="float : left; min-width: 50%; margin: 5px 0 0 0;">Date/Time Committed : 01/01/2014 1:03 PM</div>
+            
+                    <div style="float : left; margin: 5px 0 0 0;">Place Committed : Downtown Area</div>
+                </div>
+            </div>
+            <!-- RESULT -->
+        </div>
+        <!-- BODY -->
+
+        <!-- FILTER -->
+        <div id="search-filter-container" style="font-size: 12px; display: none; text-align: left;">
+            <div style="font-size: 16px; border-bottom: solid 1px #808080; margin-bottom: 5px;">Filter</div>
+            <div><input type="checkbox" checked="checked" value=""/> First Name</div>
+            <div><input type="checkbox" checked="checked" value=""/> Last Name</div>
+            <div><input type="checkbox" checked="checked" value=""/> Place Commited</div>
+            <div><input type="checkbox" id="cb-date"/> Date</div>
+            <div style="text-align: right; padding: 5px 5px 5px 26px;">
+                <div style="margin-bottom: 5px;">
+                    from <input type="text" id="dateFrom" disabled="disabled"/>
+                </div>
+                <div>
+                    to <input type="text" id="dateTo" disabled="disabled"/>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: solid 1px #808080; margin-top: 5px; padding-top: 3px;">
+                <input type="button" value="ok" id="btn-filter-ok"/>
+            </div>
+        </div>
+        <!-- FILTER -->
+
+        <!-- LOGIN -->
+        <div id="login-container" style="font-size: 12px; display: none; text-align: left;">
+            <form method="post" id="form-login">
+                <div style="font-size: 16px; border-bottom: solid 1px #808080; margin-bottom: 5px;">Login</div>
+                <div style="text-align: right; padding: 5px 5px 5px 26px;">
+                    <div style="margin-bottom: 5px;">
+                        Username <input type="text" id="txt-username"/>
+                    </div>
+                    <div>
+                        Password <input type="password" id="txt-password"/>
+                    </div>
+                    <div id="login-result" style="text-align:center; color:red; margin-top: 3px;"></div>
+                </div>
+                <div style="text-align: right; border-top: solid 1px #808080; margin-top: 5px; padding-top: 3px;">
+                    <input type="button" value="ok" id="btn-login-ok"/>
+                    <input type="button" value="cancel" id="btn-login-cancel"/>
+                </div>
+            </form>
+        </div>
+        <!-- LOGIN -->
+    </body>
+
+    <script src="lib/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="lib/jquery.blockUI.js" type="text/javascript"></script>
+    <script src="lib/jquery.datetimepicker.js" type="text/javascript"></script>
+    <script src="lib/date.format.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var date = new Date();
+            var result = date.format("yyyy/mm/dd HH:mm2");
+
+            $('#dateFrom').val(result);
+            $('#dateTo').val(result);
+        });
+
+        $(document).delegate("#btn-filter", "click", function () {
+            $.blockUI({
+                centerY: 0,
+                message: $("#search-filter-container"),
+                css: {
+                    padding: "5px 10px 5px 5px",
+                    width: "auto",
+                    border: "1px",
+                    cursor: "default",
+                    top: "35%",
+                    left: "40%"
+                },
+                overlayCSS: {
+                    cursor: "default"
+                }
+            });
+        });
+
+        $(document).delegate("#cb-date", "click", function (e) {
+            var isChecked = $("#cb-date").is(":checked");
+
+            if (isChecked) {
+                $("#dateFrom").removeAttr("disabled");
+                $("#dateTo").removeAttr("disabled");
+            } else {
+                $("#dateFrom").attr("disabled", "disabled");
+                $("#dateTo").attr("disabled", "disabled");
+            }
+        });
+
+        $(document).delegate("#btn-filter-ok", "click", function () {
+            $.unblockUI();
+        });
+
+        $(document).delegate("#btn-login", "click", function () {
+            $.blockUI({
+                centerY: 0,
+                message: $("#login-container"),
+                css: {
+                    padding: "5px 10px 5px 5px",
+                    width: "auto",
+                    border: "1px",
+                    cursor: "default",
+                    top: "35%",
+                    left: "40%"
+                },
+                overlayCSS: {
+                    cursor: "default"
+                }
+            });
+        });
+
+        $(document).delegate("#btn-login-ok", "click", function () {
+            var username = $("#txt-username").val();
+            var password = $("#txt-password").val();
+
+            $.ajax({
+                url: "server/login.php?username=" + username + "&password=" + password + "",
+                dataType: 'json',
+                context: document.body
+            }).success(function (data) {
+                console.log(data.result);
+
+                if (data.result) {
+                    $("#login-result").css("color", "green");
+                    $("#login-result").html("Redirecting...");
+
+                    $("#form-login").submit();
+                } else {
+                    $("#login-result").html("Invalid username or password");
+                }
+            });
+        });
+
+        $(document).delegate("#btn-login-cancel", "click", function () {
+            $.unblockUI();
+        });
+
+        $('#dateFrom').datetimepicker();
+        $('#dateTo').datetimepicker();
+    </script>
+</html>
